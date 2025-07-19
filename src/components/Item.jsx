@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Item({title, id, status}){
+export default function Item({title, id, status, time}){
 
     const [checked, setChecked] = useState(status);
     const classes = ['todo'];
@@ -18,7 +18,7 @@ export default function Item({title, id, status}){
             }
             return true;
         })
-        console.log(storedTodos);
+        // console.log(storedTodos);
         localStorage.setItem('tasks', JSON.stringify(storedTodos));
     }
 
@@ -32,7 +32,7 @@ export default function Item({title, id, status}){
             }
             return false;
         });
-        console.log(removeTodos);
+        // console.log(removeTodos);
         localStorage.setItem('tasks',JSON.stringify(removeTodos));
     }
 
@@ -45,7 +45,7 @@ export default function Item({title, id, status}){
                             checked={checked}
                             onChange={updateStatus}
                         />
-                        <span>{title}</span>
+                        <span>{title} {time}</span>
                         <i className="material-icons red-text"
                             onClick={removeElement}
                         >
