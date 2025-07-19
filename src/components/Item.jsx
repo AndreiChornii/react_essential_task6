@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function Item({title, id, status, time}){
 
     const [checked, setChecked] = useState(status);
+    const [tasksTitle, setTasksTitle] = useState(title);
     const classes = ['todo'];
 
     if(checked){
@@ -36,6 +37,19 @@ export default function Item({title, id, status, time}){
         localStorage.setItem('tasks',JSON.stringify(removeTodos));
     }
 
+    const editElement = (e) => {
+        const storedTodos = JSON.parse(localStorage.getItem('tasks'));
+        if(e.key === 'Enter') {
+            let editedTodos = storedTodos.map(note => {
+                if(note.id === id){
+                    note.title = tasksTitle;
+                }
+                return note;
+            });
+            localStorage.setItem('tasks',JSON.stringify(editedTodos));
+        }
+    }
+
     return (
         <>
             {visible && (
@@ -45,13 +59,23 @@ export default function Item({title, id, status, time}){
                             checked={checked}
                             onChange={updateStatus}
                         />
-                        <span>{title} {time}</span>
+
+                        <span>{tasksTitle} {time}</span>
                         <i className="material-icons red-text"
                             onClick={removeElement}
                         >
                             X
                         </i>
                     </label>
+                    {
+                        !checked && <label>
+                            <input type="text"
+                                value={tasksTitle}
+                                onChange={event => setTasksTitle(event.target.value)}
+                                onKeyDown={editElement}
+                            />
+                        </label>
+                    }
                 </li>
             )}
 
