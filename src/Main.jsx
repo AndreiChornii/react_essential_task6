@@ -5,23 +5,23 @@ import useLocalStorage from './useLocalStorage';
 
 function Main(){
 
-    // const [tasks, setTasks] = useState(() => {
-    //     const storedTodos = localStorage.getItem('tasks');
-    //     if(!storedTodos){
-    //         return [];
-    //     } else {
-    //         return JSON.parse(storedTodos);
-    //     }
-    // });
+    const [tasks, setTasks] = useState(() => {
+        const storedTodos = localStorage.getItem('tasks');
+        if(!storedTodos){
+            return [];
+        } else {
+            return JSON.parse(storedTodos);
+        }
+    });
 
-    const [tasks, setTasks] = useLocalStorage('tasks', () => {
-            const storedTodos = localStorage.getItem('tasks');
-            if(!storedTodos){
-                return [];
-            } else {
-                return JSON.parse(storedTodos);
-            }
-        });
+    // const [tasks, setTasks] = useLocalStorage('tasks', () => {
+    //         const storedTodos = localStorage.getItem('tasks');
+    //         if(!storedTodos){
+    //             return [];
+    //         } else {
+    //             return JSON.parse(storedTodos);
+    //         }
+    //     });
 
     const [tasksTitle, setTasksTitle] = useState('');
 
@@ -31,6 +31,13 @@ function Main(){
 
 
     // console.log(tasks);
+
+
+    useEffect(() => {
+        localStorage.setItem('tasks', JSON.stringify([]));
+    }, []);
+    
+
     
     useEffect(() => {
         localStorage.setItem('tasks',JSON.stringify(tasks));
