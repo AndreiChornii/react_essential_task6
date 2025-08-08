@@ -75,7 +75,7 @@ function Main(){
         });
         handleUnfixedTasksChange(amountOfUnfixedTasks);
 
-    });
+    }, [tasks]);
     
 
     
