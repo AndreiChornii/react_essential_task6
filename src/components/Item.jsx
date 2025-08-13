@@ -68,7 +68,8 @@ export default function Item({title, id, status, time}){
                         </i>
                     </label>
                     {
-                        !checked && <label>
+                        !checked && 
+                        <label>
                             <input type="text"
                                 value={tasksTitle}
                                 onChange={event => setTasksTitle(event.target.value)}

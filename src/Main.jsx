@@ -75,12 +75,12 @@ function Main(){
         });
         handleUnfixedTasksChange(amountOfUnfixedTasks);
 
-    });
+    },[]);
     
 
     
 
-    // console.log('tasks', tasks);
+    console.log('tasks', tasks);
     // console.log('amountOfUnfixedTasks', amountOfUnfixedTasks)
     const addTask = (e) => {
         const storedTodos = JSON.parse(localStorage.getItem('tasks'));
@@ -103,10 +103,10 @@ function Main(){
             <span>{month + ' ' + day + ', ' + year}</span>
             <span> | unfixed tasks: {amountOfUnfixedTasks.length}</span>
             <div className="input-field">
-                <input type="text" 
-                value={tasksTitle}
-                onChange={event => setTasksTitle(event.target.value)}
-                onKeyDown={addTask}
+                <input type="text"
+                    value={tasksTitle}
+                    onChange={event => setTasksTitle(event.target.value)}
+                    onKeyDown={addTask}
                 />
                 <label>Task name</label>
             </div>
